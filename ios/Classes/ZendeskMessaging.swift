@@ -55,7 +55,10 @@ public class ZendeskMessaging: NSObject {
     func clearConversationTags() {
         Zendesk.instance?.messaging?.clearConversationTags()
     }
-    
+       func setConversationFields(data:Dictionary<String, Any>) {
+        Zendesk.instance?.messaging?.setConversationTags(data)
+    }
+
     func loginUser(jwt: String) {
         Zendesk.instance?.loginUser(with: jwt) { result in
             switch result {

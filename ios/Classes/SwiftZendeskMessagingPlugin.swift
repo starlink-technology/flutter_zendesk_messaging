@@ -10,7 +10,7 @@ public class SwiftZendeskMessagingPlugin: NSObject, FlutterPlugin {
     init(channel: FlutterMethodChannel) {
         self.channel = channel
     }
-    
+    cc
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "zendesk_messaging", binaryMessenger: registrar.messenger())
         let instance = SwiftZendeskMessagingPlugin(channel: channel)
@@ -78,6 +78,14 @@ public class SwiftZendeskMessagingPlugin: NSObject, FlutterPlugin {
                     print("\(TAG) - Messaging needs to be initialized first.\n")
                 }
                 zendeskMessaging.clearConversationTags()
+                break
+
+                  case "setConversationFields":
+                if (!isInitialized) {
+                    print("\(TAG) - Messaging needs to be initialized first.\n")
+                }
+                let data: Dictionary<String, Any> = arguments?["data"] as! Dictionary<String, Any>
+                zendeskMessaging.setConversationFields(data:data)
                 break
             case "invalidate":
                 if (!isInitialized) {
