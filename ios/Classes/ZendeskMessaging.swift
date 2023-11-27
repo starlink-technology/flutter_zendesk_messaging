@@ -55,8 +55,11 @@ public class ZendeskMessaging: NSObject {
     func clearConversationTags() {
         Zendesk.instance?.messaging?.clearConversationTags()
     }
-       func setConversationFields(data:Dictionary<String, Any>) {
-        Zendesk.instance?.messaging?.setConversationTags(data)
+       func setConversationFields(data:[String: Any]) {
+           let convertedResponse: [String: AnyHashable] = Dictionary(uniqueKeysWithValues: data.map { key, value in
+                     (key, value as! AnyHashable)
+                   })
+        Zendesk.instance?.messaging?.setConversationFields(convertedResponse)
     }
 
     func loginUser(jwt: String) {
