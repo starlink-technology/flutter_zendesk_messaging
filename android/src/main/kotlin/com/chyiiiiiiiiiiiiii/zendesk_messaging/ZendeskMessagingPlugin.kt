@@ -107,6 +107,16 @@ class ZendeskMessagingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
                 zendeskMessaging.clearConversationTags()
             }
+                 "setConversationFields" -> {
+                if (!isInitialized) {
+                    println("$tag - Messaging needs to be initialized first")
+                    return
+                }
+
+                 val data = call.argument<Map<String,Any>>("data")!!
+                zendeskMessaging.setConversationFields(data)
+
+            }
             "invalidate" -> {
                 if (!isInitialized) {
                     println("$tag - Messaging is already on an invalid state")
